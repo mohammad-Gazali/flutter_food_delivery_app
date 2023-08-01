@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utils/utils.dart';
 import 'package:food_delivery_app/widgets/widgets.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _rememberMe = false;
+  final _passwordConfirmController = TextEditingController();
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _passwordConfirmController.dispose();
     super.dispose();
   }
 
@@ -42,10 +45,39 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 56,
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 28,
+                          ),
+                          Transform.scale(
+                            scale: 0.8,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              backgroundColor: Colors.white,
+                              elevation: 0,
+                              focusElevation: 0,
+                              hoverElevation: 0,
+                              disabledElevation: 0,
+                              highlightElevation: 0,
+                              child: const Icon(
+                                Icons.arrow_back_ios_new_rounded,
+                                color: Color(0xFF5E616F),
+                              ),
+                            ),
+                          ),
+                          Expanded(child: Container())
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       const Text(
-                        "Log In",
+                        "Sign Up",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -57,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 16,
                       ),
                       const Text(
-                        "Please sign in to your existing account",
+                        "Please sign up to get started",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -82,6 +114,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             children: [
                               AppTextInput(
+                                label: "Name",
+                                hintText: "Ali Rami",
+                                controller: _nameController,
+                              ),
+                              const SizedBox(
+                                height: 28,
+                              ),
+                              AppTextInput(
                                 label: "Email",
                                 hintText: "example@gmail.com",
                                 controller: _emailController,
@@ -99,57 +139,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(
                                 height: 28,
                               ),
-                              Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 1.3,
-                                    child: Checkbox(
-                                      value: _rememberMe,
-                                      fillColor: const MaterialStatePropertyAll(
-                                        AppColors.primary,
-                                      ),
-                                      onChanged: (v) {
-                                        setState(() {
-                                          _rememberMe = v ?? false;
-                                        });
-                                      },
-                                      side: const BorderSide(
-                                        color: Color(0xFFE3EBF2),
-                                        width: 2,
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _rememberMe = !_rememberMe;
-                                      });
-                                    },
-                                    child: const Text(
-                                      "Remember me",
-                                      style: TextStyle(
-                                        color: Color(0xFF7E8A97),
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: const Text(
-                                      "Forgot Password",
-                                      style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              AppTextInput(
+                                label: "Password Confirmation",
+                                hintText: "* * * * * * * * *",
+                                controller: _passwordConfirmController,
+                                isPassword: true,
                               ),
                               const SizedBox(
                                 height: 36,
                               ),
-                              AppButton(onTap: () {}, text: "log in"),
+                              AppButton(onTap: () {}, text: "sign up"),
                               const SizedBox(
                                 height: 26,
                               ),
@@ -157,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text(
-                                    "Don't have an account ?",
+                                    "Already have an account ?",
                                     style: TextStyle(
                                       color: Color(0xFF646982),
                                       fontSize: 16,
@@ -169,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   GestureDetector(
                                     onTap: () {},
                                     child: const Text(
-                                      "SING UP",
+                                      "LOG IN",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: AppColors.primary,

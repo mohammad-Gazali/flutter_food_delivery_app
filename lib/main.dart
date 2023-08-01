@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.sen().fontFamily,
       ),
-      home: const LoginScreen(),
+      home: const LocationAccessScreen(),
     );
   }
 }

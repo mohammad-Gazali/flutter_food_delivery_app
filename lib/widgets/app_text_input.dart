@@ -4,6 +4,7 @@ class AppTextInput extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final String hintText;
+  final TextInputType type;
   final bool isPassword;
 
   const AppTextInput({
@@ -11,41 +12,47 @@ class AppTextInput extends StatelessWidget {
     required this.controller,
     required this.label,
     required this.hintText,
+    this.type = TextInputType.text,
     this.isPassword = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label.toUpperCase(),
-          style: const TextStyle(fontSize: 16),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        TextField(
-          obscureText: isPassword,
-          style: const TextStyle(
-            color: Color(0xFF32343E),
-            fontSize: 20,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: 400,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label.toUpperCase(),
+            style: const TextStyle(fontSize: 16),
           ),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFFF0F5FA),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
+          const SizedBox(
+            height: 12,
+          ),
+          TextField(
+            obscureText: isPassword,
+            style: const TextStyle(
+              color: Color(0xFF32343E),
+              fontSize: 20,
             ),
-            hintText: hintText,
-            hintStyle: const TextStyle(
-              color: Color(0xFFA0A5BA),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: const Color(0xFFF0F5FA),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+              hintText: hintText,
+              hintStyle: const TextStyle(
+                color: Color(0xFFA0A5BA),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

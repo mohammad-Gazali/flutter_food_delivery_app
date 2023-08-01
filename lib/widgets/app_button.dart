@@ -3,16 +3,19 @@ import 'package:food_delivery_app/utils/app_colors.dart';
 import 'package:food_delivery_app/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class AppButton extends StatelessWidget {
   final String text;
   final void Function() onTap;
+  final Widget? endIcon;
+  final double iconSpace;
   final double fontSize;
 
   const AppButton({
     super.key,
     required this.onTap,
     required this.text,
+    this.endIcon,
+    this.iconSpace = 12,
     this.fontSize = 18,
   });
 
@@ -35,7 +38,16 @@ class AppButton extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: fontSize),
               alignment: Alignment.center,
-              child: Text(text.toUpperCase()),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(text.toUpperCase()),
+                  if (endIcon != null) ...[
+                    SizedBox(width: iconSpace),
+                    endIcon!,
+                  ]
+                ],
+              ),
             ),
           ),
         ),
