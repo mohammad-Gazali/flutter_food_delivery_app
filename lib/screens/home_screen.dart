@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/models.dart';
 import 'package:food_delivery_app/utils/utils.dart';
+import 'package:food_delivery_app/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final fakeCategories = List.generate(
-    6,
-    (index) => CategoryModel(
-        id: index, name: "Test $index", imageUrl: "https://placehold.co/44/png"));
+  6,
+  (index) => CategoryModel(
+    id: index,
+    name: "Test ${index + 1}",
+    imageUrl: "https://placehold.co/44/png",
+  ),
+);
+
+final fakeRestaurants = List.generate(
+  9,
+  (index) => RestaurantModel(
+    id: index,
+    name: "Restaurant Test ${index + 1}",
+    rate: 4.7,
+    estimatedMinutes: 25,
+    deliveryPrice: index % 2 == 0 ? 0.0 : 24.99,
+    open: true,
+    introImage: "https://placehold.co/400x200/png",
+    foods: index % 3 == 0
+        ? [
+            "Burger",
+            "Chicken",
+            "Rice",
+            "Wings",
+          ]
+        : [
+            "Pizza",
+          ],
+  ),
+);
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +46,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _searchTextController = TextEditingController();
   int _choosedCategoryIndex = 0;
+
+  Future<void> _showOfferDialog() async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          // TODO: handle offer code
+          return const OfferDialog(offerCode: "1243CD2", discountValue: 25,);
+        });
+  }
 
   @override
   void dispose() {
@@ -37,8 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               // app bar
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 28,
+                  vertical: 18,
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -210,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: 100,
+                      height: 126,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -224,15 +263,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 _choosedCategoryIndex = index;
                               });
                             },
-                            child: Card(
-                              elevation: 10,
-                              color: index == _choosedCategoryIndex
-                                  ? AppColors.primary300
-                                  : null,
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
                               margin: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              shape: RoundedRectangleBorder(
+                                horizontal: 8,
+                                vertical: 14,
+                              ),
+                              decoration: BoxDecoration(
+                                color: index == _choosedCategoryIndex
+                                    ? AppColors.primary300
+                                    : Colors.white,
                                 borderRadius: BorderRadius.circular(100),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 30,
+                                    color: const Color(0xFF96969A)
+                                        .withOpacity(0.15),
+                                    spreadRadius: 0,
+                                    offset: const Offset(12, 12),
+                                  )
+                                ],
                               ),
                               child: Row(
                                 children: [
@@ -244,7 +294,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 44,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(22),
-                                      child: Image.network(category.imageUrl, height: 44, width: 44, ),
+                                      child: Image.network(
+                                        category.imageUrl,
+                                        height: 44,
+                                        width: 44,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
@@ -268,8 +322,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                     ),
-
-                    const SizedBox(height: 28,),
 
                     // restaurants section
                     Row(
@@ -302,8 +354,111 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                    
-                    //? continue form building ListView.builder for Open Restaurants
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    Column(
+                      children: fakeRestaurants.map((restaurant) {
+                        return GestureDetector(
+                          onTap: () {},
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      image:
+                                          NetworkImage(restaurant.introImage),
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                restaurant.name,
+                                style: const TextStyle(
+                                  color: Color(0xFF181C2E),
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                restaurant.foods.join(" - "),
+                                style: const TextStyle(
+                                  color: Color(0xFFA0A5BA),
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.star_border,
+                                    color: AppColors.primary,
+                                  ),
+                                  Text(
+                                    " ${restaurant.rate}",
+                                    style: const TextStyle(
+                                      color: Color(0xFF181C2E),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  const Icon(
+                                    Icons.local_shipping_outlined,
+                                    color: AppColors.primary,
+                                  ),
+                                  if (restaurant.deliveryPrice == 0)
+                                    const Text(
+                                      " Free",
+                                      style: TextStyle(
+                                        color: Color(0xFF181C2E),
+                                        fontSize: 14,
+                                      ),
+                                    )
+                                  else
+                                    Text(
+                                      " \$${restaurant.deliveryPrice.toStringAsFixed(2)}",
+                                      style: const TextStyle(
+                                        color: Color(0xFF181C2E),
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  const Icon(
+                                    Icons.access_time,
+                                    color: AppColors.primary,
+                                  ),
+                                  Text(
+                                    " ${restaurant.estimatedMinutes} min",
+                                    style: const TextStyle(
+                                      color: Color(0xFF181C2E),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ],
                 ),
               ),
