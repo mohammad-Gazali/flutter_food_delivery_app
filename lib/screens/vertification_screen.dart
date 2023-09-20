@@ -65,7 +65,7 @@ class _VertificationScreenState extends State<VertificationScreen> {
                               ),
                             ),
                           ),
-                          Expanded(child: Container())
+                          const Spacer(),
                         ],
                       ),
                       const SizedBox(

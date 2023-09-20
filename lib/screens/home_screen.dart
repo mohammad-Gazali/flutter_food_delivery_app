@@ -44,426 +44,441 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _searchTextController = TextEditingController();
   int _choosedCategoryIndex = 0;
 
   Future<void> _showOfferDialog() async {
     return showDialog(
-        context: context,
-        builder: (context) {
-          // TODO: handle offer code
-          return const OfferDialog(offerCode: "1243CD2", discountValue: 25,);
-        });
-  }
-
-  @override
-  void dispose() {
-    _searchTextController.dispose();
-    super.dispose();
+      context: context,
+      builder: (context) {
+        // TODO: handle offer code
+        return const OfferDialog(
+          offerCode: "1243CD2",
+          discountValue: 25,
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          child: ListView(
-            children: [
-              // app bar
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 28,
-                  vertical: 18,
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
+        child: ListView(
+          children: [
+            // app bar
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 28,
+                vertical: 18,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 45,
+                    height: 45,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(22.5),
+                      child: Material(
+                        color: const Color(0xFFECF0F4),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Image.asset("assets/menu.png"),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  GestureDetector(
+                    // TODO: handle location here
+                    onTap: () {},
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "DELIVER TO",
+                          style: TextStyle(
+                            color: AppColors.primary400,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              // TODO: put location name
+                              "Park Street",
+                              style: TextStyle(
+                                color: Color(0xFF676767),
+                                fontSize: 14,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down_sharp,
+                              color: Color(0xFF676767),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Badge(
+                    // TODO: add products number
+                    label: const Text("3"),
+                    textColor: AppColors.primaryContent,
+                    backgroundColor: AppColors.primary,
+                    offset: const Offset(-2, 2),
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                    ),
+                    child: SizedBox(
                       width: 45,
                       height: 45,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(22.5),
                         child: Material(
-                          color: const Color(0xFFECF0F4),
+                          color: const Color(0xFF181C2E),
                           child: InkWell(
                             onTap: () {},
-                            child: Image.asset("assets/menu.png"),
+                            child: Image.asset("assets/cart.png"),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 16,
+                  ),
+                ],
+              ),
+            ),
+
+            // main body
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // welcome text
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: RichText(
+                    text: TextSpan(
+                      // TODO: use the name of the user
+                      text: "Hey Mohammed, ",
+                      style: GoogleFonts.sen(
+                        color: const Color(0xFF1E1D1D),
+                      ),
+                      children: const [
+                        TextSpan(
+                          text: "Have a nice day.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    GestureDetector(
-                      // TODO: handle location here
-                      onTap: () {},
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 28,
+                ),
+
+                // search bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: GestureDetector(
+                    onTap: () {
+                      // TODO: redirect to search page
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF6F6F6),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Row(
                         children: [
+                          Icon(
+                            Icons.search,
+                            color: Color(0xFF676767),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
-                            "DELIVER TO",
+                            "Search dishes, restaurants",
                             style: TextStyle(
-                              color: AppColors.primary400,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                              color: Color(0xFF676767),
+                              fontSize: 14,
                             ),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                // TODO: put location name
-                                "Park Street",
-                                style: TextStyle(
-                                  color: Color(0xFF676767),
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_drop_down_sharp,
-                                color: Color(0xFF676767),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     ),
-                    const Spacer(),
-                    Badge(
-                      // TODO: add products number
-                      label: const Text("3"),
-                      textColor: AppColors.primaryContent,
-                      backgroundColor: AppColors.primary,
-                      offset: const Offset(-2, 2),
-                      textStyle: const TextStyle(
-                        fontSize: 14,
-                      ),
-                      child: SizedBox(
-                        width: 45,
-                        height: 45,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(22.5),
-                          child: Material(
-                            color: const Color(0xFF181C2E),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Image.asset("assets/cart.png"),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
 
-              // main body
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // welcome text
-                    RichText(
-                      text: TextSpan(
-                        // TODO: use the name of the user
-                        text: "Hey Mohammed, ",
-                        style: GoogleFonts.sen(
-                          color: const Color(0xFF1E1D1D),
-                        ),
-                        children: const [
-                          TextSpan(
-                            text: "Have a nice day.",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                const SizedBox(
+                  height: 28,
+                ),
 
-                    const SizedBox(
-                      height: 28,
-                    ),
-
-                    // search bar
-                    TextField(
-                      controller: _searchTextController,
-                      style: const TextStyle(
-                        color: Color(0xFF181C2E),
-                      ),
-                      decoration: InputDecoration(
-                        hintText: "Search dishes, restaurants",
-                        hintStyle: const TextStyle(
-                          color: Color(0xFF676767),
-                          fontSize: 14,
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Color(0xFF676767),
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFFF6F6F6),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
+                // categories section
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "All Categories",
+                        style: TextStyle(
+                          color: Color(0xFF32343E),
+                          fontSize: 20,
                         ),
                       ),
-                    ),
-
-                    const SizedBox(
-                      height: 28,
-                    ),
-
-                    // categories section
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "All Categories",
-                          style: TextStyle(
-                            color: Color(0xFF32343E),
-                            fontSize: 20,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Row(
-                            children: [
-                              Text(
-                                "See All ",
-                                style: TextStyle(
-                                  color: Color(0xFF333333),
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_outlined,
-                                color: Color(0xFFA0A5BA),
-                                size: 14,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 126,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        itemCount: fakeCategories.length,
-                        itemBuilder: (context, index) {
-                          final category = fakeCategories[index];
-                          return GestureDetector(
-                            onTap: () {
-                              // TODO: continue handling
-                              setState(() {
-                                _choosedCategoryIndex = index;
-                              });
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 14,
-                              ),
-                              decoration: BoxDecoration(
-                                color: index == _choosedCategoryIndex
-                                    ? AppColors.primary300
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 30,
-                                    color: const Color(0xFF96969A)
-                                        .withOpacity(0.15),
-                                    spreadRadius: 0,
-                                    offset: const Offset(12, 12),
-                                  )
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  SizedBox(
-                                    width: 44,
-                                    height: 44,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(22),
-                                      child: Image.network(
-                                        category.imageUrl,
-                                        height: 44,
-                                        width: 44,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 12,
-                                  ),
-                                  Text(
-                                    category.name,
-                                    style: const TextStyle(
-                                      color: Color(0xFF32343E),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                ],
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Row(
+                          children: [
+                            Text(
+                              "See All ",
+                              style: TextStyle(
+                                color: Color(0xFF333333),
                               ),
                             ),
-                          );
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: Color(0xFFA0A5BA),
+                              size: 14,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 126,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    itemCount: fakeCategories.length,
+                    itemBuilder: (context, index) {
+                      final category = fakeCategories[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // TODO: continue handling
+                          setState(() {
+                            _choosedCategoryIndex = index;
+                          });
                         },
-                      ),
-                    ),
-
-                    // restaurants section
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Open Restaurants",
-                          style: TextStyle(
-                            color: Color(0xFF32343E),
-                            fontSize: 20,
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          margin: EdgeInsets.only(
+                            left: index == 0 ? 28 : 12,
+                            right: index == fakeCategories.length - 1 ? 28 : 0,
+                            top: 14,
+                            bottom: 14,
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Row(
-                            children: [
-                              Text(
-                                "See All ",
-                                style: TextStyle(
-                                  color: Color(0xFF333333),
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_outlined,
-                                color: Color(0xFFA0A5BA),
-                                size: 14,
+                          decoration: BoxDecoration(
+                            color: index == _choosedCategoryIndex
+                                ? AppColors.primary300
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(100),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 30,
+                                color:
+                                    const Color(0xFF96969A).withOpacity(0.15),
+                                spreadRadius: 0,
+                                offset: const Offset(12, 12),
                               )
                             ],
                           ),
-                        )
-                      ],
-                    ),
-
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    Column(
-                      children: fakeRestaurants.map((restaurant) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              Container(
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                      image:
-                                          NetworkImage(restaurant.introImage),
-                                      fit: BoxFit.cover),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 44,
+                                height: 44,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(22),
+                                  child: Image.network(
+                                    category.imageUrl,
+                                    height: 44,
+                                    width: 44,
+                                  ),
                                 ),
                               ),
                               const SizedBox(
-                                height: 6,
+                                width: 12,
                               ),
                               Text(
-                                restaurant.name,
+                                category.name,
                                 style: const TextStyle(
-                                  color: Color(0xFF181C2E),
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Text(
-                                restaurant.foods.join(" - "),
-                                style: const TextStyle(
-                                  color: Color(0xFFA0A5BA),
+                                  color: Color(0xFF32343E),
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
                               ),
                               const SizedBox(
-                                height: 10,
+                                width: 16,
                               ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.star_border,
-                                    color: AppColors.primary,
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // restaurants section
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Open Restaurants",
+                        style: TextStyle(
+                          color: Color(0xFF32343E),
+                          fontSize: 20,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Row(
+                          children: [
+                            Text(
+                              "See All ",
+                              style: TextStyle(
+                                color: Color(0xFF333333),
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: Color(0xFFA0A5BA),
+                              size: 14,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 20,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: Column(
+                    children: fakeRestaurants.map((restaurant) {
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                    image: NetworkImage(restaurant.introImage),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Text(
+                              restaurant.name,
+                              style: const TextStyle(
+                                color: Color(0xFF181C2E),
+                                fontSize: 20,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Text(
+                              restaurant.foods.join(" - "),
+                              style: const TextStyle(
+                                color: Color(0xFFA0A5BA),
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.star_border,
+                                  color: AppColors.primary,
+                                ),
+                                Text(
+                                  " ${restaurant.rate}",
+                                  style: const TextStyle(
+                                    color: Color(0xFF181C2E),
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Text(
-                                    " ${restaurant.rate}",
-                                    style: const TextStyle(
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                const Icon(
+                                  Icons.local_shipping_outlined,
+                                  color: AppColors.primary,
+                                ),
+                                if (restaurant.deliveryPrice == 0)
+                                  const Text(
+                                    " Free",
+                                    style: TextStyle(
                                       color: Color(0xFF181C2E),
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  const Icon(
-                                    Icons.local_shipping_outlined,
-                                    color: AppColors.primary,
-                                  ),
-                                  if (restaurant.deliveryPrice == 0)
-                                    const Text(
-                                      " Free",
-                                      style: TextStyle(
-                                        color: Color(0xFF181C2E),
-                                        fontSize: 14,
-                                      ),
-                                    )
-                                  else
-                                    Text(
-                                      " \$${restaurant.deliveryPrice.toStringAsFixed(2)}",
-                                      style: const TextStyle(
-                                        color: Color(0xFF181C2E),
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  const Icon(
-                                    Icons.access_time,
-                                    color: AppColors.primary,
-                                  ),
+                                  )
+                                else
                                   Text(
-                                    " ${restaurant.estimatedMinutes} min",
+                                    " \$${restaurant.deliveryPrice.toStringAsFixed(2)}",
                                     style: const TextStyle(
                                       color: Color(0xFF181C2E),
                                       fontSize: 14,
                                     ),
                                   ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                const Icon(
+                                  Icons.access_time,
+                                  color: AppColors.primary,
+                                ),
+                                Text(
+                                  " ${restaurant.estimatedMinutes} min",
+                                  style: const TextStyle(
+                                    color: Color(0xFF181C2E),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -33,6 +33,7 @@ class AppTextInput extends StatelessWidget {
             height: 12,
           ),
           TextField(
+            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
             obscureText: isPassword,
             style: const TextStyle(
               color: Color(0xFF32343E),

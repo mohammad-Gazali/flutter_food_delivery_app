@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
-  final void Function() onTap;
+  final VoidCallback onTap;
   final Widget? endIcon;
   final double iconSpace;
   final double fontSize;

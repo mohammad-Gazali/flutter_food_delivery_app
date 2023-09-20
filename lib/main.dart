@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/models/category.dart';
 import 'package:food_delivery_app/screens/screens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +18,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.sen().fontFamily,
       ),
-      home: const HomeScreen(),
+      home: const CategoryScreen(
+        category: CategoryModel(
+          id: 1,
+          name: "Burger",
+          imageUrl: "https://placehold.co/44/png",
+        ),
+      ),
     );
   }
 }
