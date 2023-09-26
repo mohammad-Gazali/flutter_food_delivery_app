@@ -4,7 +4,7 @@ import 'package:food_delivery_app/utils/utils.dart';
 import 'package:food_delivery_app/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final fakeCategories = List.generate(
+final _fakeCategories = List.generate(
   6,
   (index) => CategoryModel(
     id: index,
@@ -13,7 +13,7 @@ final fakeCategories = List.generate(
   ),
 );
 
-final fakeRestaurants = List.generate(
+final _fakeRestaurants = List.generate(
   9,
   (index) => RestaurantModel(
     id: index,
@@ -263,9 +263,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    itemCount: fakeCategories.length,
+                    itemCount: _fakeCategories.length,
                     itemBuilder: (context, index) {
-                      final category = fakeCategories[index];
+                      final category = _fakeCategories[index];
                       return GestureDetector(
                         onTap: () {
                           // TODO: continue handling
@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           duration: const Duration(milliseconds: 200),
                           margin: EdgeInsets.only(
                             left: index == 0 ? 28 : 12,
-                            right: index == fakeCategories.length - 1 ? 28 : 0,
+                            right: index == _fakeCategories.length - 1 ? 28 : 0,
                             top: 14,
                             bottom: 14,
                           ),
@@ -377,101 +377,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
                   child: Column(
-                    children: fakeRestaurants.map((restaurant) {
-                      return GestureDetector(
-                        onTap: () {},
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 200,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                    image: NetworkImage(restaurant.introImage),
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Text(
-                              restaurant.name,
-                              style: const TextStyle(
-                                color: Color(0xFF181C2E),
-                                fontSize: 20,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Text(
-                              restaurant.foods.join(" - "),
-                              style: const TextStyle(
-                                color: Color(0xFFA0A5BA),
-                                fontSize: 14,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.star_border,
-                                  color: AppColors.primary,
-                                ),
-                                Text(
-                                  " ${restaurant.rate}",
-                                  style: const TextStyle(
-                                    color: Color(0xFF181C2E),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                const Icon(
-                                  Icons.local_shipping_outlined,
-                                  color: AppColors.primary,
-                                ),
-                                if (restaurant.deliveryPrice == 0)
-                                  const Text(
-                                    " Free",
-                                    style: TextStyle(
-                                      color: Color(0xFF181C2E),
-                                      fontSize: 14,
-                                    ),
-                                  )
-                                else
-                                  Text(
-                                    " \$${restaurant.deliveryPrice.toStringAsFixed(2)}",
-                                    style: const TextStyle(
-                                      color: Color(0xFF181C2E),
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                const Icon(
-                                  Icons.access_time,
-                                  color: AppColors.primary,
-                                ),
-                                Text(
-                                  " ${restaurant.estimatedMinutes} min",
-                                  style: const TextStyle(
-                                    color: Color(0xFF181C2E),
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                          ],
-                        ),
+                    children: _fakeRestaurants.map((restaurant) {
+                      return RestaurantCard(
+                        restaurant: restaurant,
                       );
                     }).toList(),
                   ),

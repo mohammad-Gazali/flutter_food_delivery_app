@@ -48,13 +48,20 @@ class PopularFoodCard extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              Text(
-                popularFood.name,
-                style: const TextStyle(
-                  color: Color(0xFF32343E),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
+              Expanded(
+                child: Text(
+                  popularFood.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: const TextStyle(
+                    color: Color(0xFF32343E),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,  
+                  ),
                 ),
+              ),
+              const SizedBox(
+                width: 16,
               ),
             ],
           ),
@@ -63,12 +70,18 @@ class PopularFoodCard extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              Text(
-                popularFood.restaurant,
-                style: const TextStyle(
-                  color: Color(0xFF646982),
-                  fontSize: 13,
+              Expanded(
+                child: Text(
+                  popularFood.restaurant,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Color(0xFF646982),
+                    fontSize: 13,
+                  ),
                 ),
+              ),
+              const SizedBox(
+                width: 16,
               ),
             ],
           ),

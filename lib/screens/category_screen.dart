@@ -1,5 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/models/category.dart';
+import 'package:food_delivery_app/models/models.dart';
+import 'package:food_delivery_app/widgets/widgets.dart';
+
+final _fakePopularFoods = List.generate(5, (index) {
+  return FoodModel(
+    id: index,
+    name: 'Food Name ${index + 1}',
+    imageUrl: 'https://placehold.co/122x84/png',
+    restaurant: 'Restaurant ${index + 1}',
+    price: 29.99,
+    category: "Category ${index + 1}",
+  );
+});
+
+final _fakeRestaurants = List.generate(
+  9,
+  (index) => RestaurantModel(
+    id: index,
+    name: "Restaurant Test ${index + 1}",
+    rate: 4.7,
+    estimatedMinutes: 25,
+    deliveryPrice: index % 2 == 0 ? 0.0 : 24.99,
+    open: true,
+    introImage: "https://placehold.co/400x200/png",
+    foods: index % 3 == 0
+        ? [
+            "Burger",
+            "Chicken",
+            "Rice",
+            "Wings",
+          ]
+        : [
+            "Pizza",
+          ],
+  ),
+);
 
 class CategoryScreen extends StatefulWidget {
   final CategoryModel category;
@@ -14,6 +49,15 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  Future<void> _showFilterDialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const FilterDialog();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,9 +154,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: Material(
                         color: const Color(0xFFECF0F4),
                         child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
+                          onTap: _showFilterDialog,
                           child: Image.asset("assets/filters.png"),
                         ),
                       ),
@@ -141,8 +183,51 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
             GridView.count(
               crossAxisCount: 2,
-              
-            )
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 0.9,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              children: _fakePopularFoods
+                  .map(
+                    (r) => PopularFoodCard(
+                      popularFood: r,
+                      withPrice: true,
+                    ),
+                  )
+                  .toList(),
+            ),
+
+            const SizedBox(
+              height: 32,
+            ),
+
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 28,
+              ),
+              child: Text(
+                "Open Resturants",
+                style: TextStyle(
+                  color: Color(0xFF32343E),
+                  fontSize: 20,
+                ),
+              ),
+            ),
+
+            const SizedBox(
+              height: 20,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 28),
+              child: Column(
+                children: _fakeRestaurants.map((restaurant) {
+                  return RestaurantCard(
+                    restaurant: restaurant,
+                  );
+                }).toList(),
+              ),
+            ),
           ],
         ),
       ),

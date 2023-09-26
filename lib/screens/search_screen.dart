@@ -11,7 +11,7 @@ final fakeRecentKeywords = [
   "Sweet",
 ];
 
-final fakePopularFoods = List.generate(5, (index) {
+final _fakePopularFoods = List.generate(5, (index) {
   return FoodModel(
     id: index,
     name: 'Food Name ${index + 1}',
@@ -364,7 +364,7 @@ class _SearchScreenState extends State<SearchScreen> {
               physics:
                   const NeverScrollableScrollPhysics(), // this attribute is for controlling scroll physics, here we disabled the scroll
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: fakePopularFoods
+              children: _fakePopularFoods
                   .map(
                     (r) => PopularFoodCard(
                       popularFood: r,
