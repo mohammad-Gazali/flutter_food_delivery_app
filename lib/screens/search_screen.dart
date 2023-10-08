@@ -11,18 +11,7 @@ final fakeRecentKeywords = [
   "Sweet",
 ];
 
-final _fakePopularFoods = List.generate(5, (index) {
-  return FoodModel(
-    id: index,
-    name: 'Food Name ${index + 1}',
-    imageUrl: 'https://placehold.co/122x84/png',
-    restaurant: 'Restaurant ${index + 1}',
-    price: 29.99,
-    category: 'Category ${index + 1}',
-  );
-});
-
-final fakeSuggestedRestaurants = List.generate(3, (index) {
+final _fakeSuggestedRestaurants = List.generate(3, (index) {
   return RestaurantModel(
     id: index,
     name: "Test ${index + 1}",
@@ -32,6 +21,19 @@ final fakeSuggestedRestaurants = List.generate(3, (index) {
     foods: [],
     introImage: "https://placehold.co/60x50/png",
     open: true,
+  );
+});
+
+final _fakePopularFoods = List.generate(5, (index) {
+  return FoodModel(
+    id: index,
+    name: 'Food Name ${index + 1}',
+    description: 'Prosciutto e funghi is a pizza variety that is topped with tomato sauce.',
+    imageUrl: 'https://placehold.co/122x84/png',
+    restaurant: _fakeSuggestedRestaurants[index % 2 == 0 ? index : index % 2],
+    price: 29.99,
+    category: 'Category ${index + 1}',
+    sizes: [],
   );
 });
 
@@ -278,7 +280,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28),
               child: Column(
-                children: fakeSuggestedRestaurants.map((restaurant) {
+                children: _fakeSuggestedRestaurants.map((restaurant) {
                   return GestureDetector(
                     onTap: () {
                       // TODO: handle tap

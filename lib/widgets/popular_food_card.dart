@@ -72,7 +72,7 @@ class PopularFoodCard extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  popularFood.restaurant,
+                  popularFood.restaurant.name,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Color(0xFF646982),

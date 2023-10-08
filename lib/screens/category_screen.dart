@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/models.dart';
 import 'package:food_delivery_app/widgets/widgets.dart';
 
-final _fakePopularFoods = List.generate(5, (index) {
-  return FoodModel(
-    id: index,
-    name: 'Food Name ${index + 1}',
-    imageUrl: 'https://placehold.co/122x84/png',
-    restaurant: 'Restaurant ${index + 1}',
-    price: 29.99,
-    category: "Category ${index + 1}",
-  );
-});
-
 final _fakeRestaurants = List.generate(
   9,
   (index) => RestaurantModel(
@@ -35,6 +24,20 @@ final _fakeRestaurants = List.generate(
           ],
   ),
 );
+
+final _fakePopularFoods = List.generate(5, (index) {
+  return FoodModel(
+    id: index,
+    name: 'Food Name ${index + 1}',
+    description:
+        'Prosciutto e funghi is a pizza variety that is topped with tomato sauce.',
+    imageUrl: 'https://placehold.co/122x84/png',
+    restaurant: _fakeRestaurants[index],
+    price: 29.99,
+    category: "Category ${index + 1}",
+    sizes: [],
+  );
+});
 
 class CategoryScreen extends StatefulWidget {
   final CategoryModel category;
