@@ -228,7 +228,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                           width: 10,
                         ),
                         Text(
-                          widget.food.restaurant.name,
+                          widget.food.restaurant!.name,
                           style: const TextStyle(
                             color: Color(0xFF181C2E),
                             fontSize: 15,
@@ -278,7 +278,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   color: AppColors.primary,
                 ),
                 Text(
-                  " ${widget.food.restaurant.rate}",
+                  " ${widget.food.restaurant!.rate}",
                   style: const TextStyle(
                     color: Color(0xFF181C2E),
                     fontWeight: FontWeight.bold,
@@ -291,7 +291,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   Icons.local_shipping_outlined,
                   color: AppColors.primary,
                 ),
-                if (widget.food.restaurant.deliveryPrice == 0)
+                if (widget.food.restaurant!.deliveryPrice == 0)
                   const Text(
                     " Free",
                     style: TextStyle(
@@ -301,7 +301,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   )
                 else
                   Text(
-                    " \$${widget.food.restaurant.deliveryPrice.toStringAsFixed(2)}",
+                    " \$${widget.food.restaurant!.deliveryPrice.toStringAsFixed(2)}",
                     style: const TextStyle(
                       color: Color(0xFF181C2E),
                       fontSize: 14,
@@ -315,7 +315,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   color: AppColors.primary,
                 ),
                 Text(
-                  " ${widget.food.restaurant.estimatedMinutes} min",
+                  " ${widget.food.restaurant!.estimatedMinutes} min",
                   style: const TextStyle(
                     color: Color(0xFF181C2E),
                     fontSize: 14,

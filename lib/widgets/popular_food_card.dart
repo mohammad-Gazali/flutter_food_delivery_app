@@ -4,11 +4,13 @@ import 'package:food_delivery_app/widgets/widgets.dart';
 
 class PopularFoodCard extends StatelessWidget {
   final FoodModel popularFood;
+  final String restaurantName;
   final bool withPrice;
 
   const PopularFoodCard({
     super.key,
     required this.popularFood,
+    required this.restaurantName,
     this.withPrice = false,
   });
 
@@ -56,7 +58,7 @@ class PopularFoodCard extends StatelessWidget {
                   style: const TextStyle(
                     color: Color(0xFF32343E),
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,  
+                    fontSize: 15,
                   ),
                 ),
               ),
@@ -72,7 +74,7 @@ class PopularFoodCard extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  popularFood.restaurant.name,
+                  restaurantName,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Color(0xFF646982),

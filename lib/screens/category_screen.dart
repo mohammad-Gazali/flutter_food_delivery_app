@@ -7,6 +7,7 @@ final _fakeRestaurants = List.generate(
   (index) => RestaurantModel(
     id: index,
     name: "Restaurant Test ${index + 1}",
+    description: "Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
     rate: 4.7,
     estimatedMinutes: 25,
     deliveryPrice: index % 2 == 0 ? 0.0 : 24.99,
@@ -14,14 +15,24 @@ final _fakeRestaurants = List.generate(
     introImage: "https://placehold.co/400x200/png",
     foods: index % 3 == 0
         ? [
-            "Burger",
-            "Chicken",
-            "Rice",
-            "Wings",
+            _fakePopularFoods[1],
+            _fakePopularFoods[2],
+            _fakePopularFoods[3],
+            _fakePopularFoods[4],
           ]
         : [
-            "Pizza",
+            _fakePopularFoods[5],
           ],
+    categories: [],
+  ),
+);
+
+final _fakeCategories = List.generate(
+  5,
+  (index) => CategoryModel(
+    id: index,
+    name: "Test ${index + 1}",
+    imageUrl: "https://placehold.co/44/png",
   ),
 );
 
@@ -32,9 +43,8 @@ final _fakePopularFoods = List.generate(5, (index) {
     description:
         'Prosciutto e funghi is a pizza variety that is topped with tomato sauce.',
     imageUrl: 'https://placehold.co/122x84/png',
-    restaurant: _fakeRestaurants[index],
     price: 29.99,
-    category: "Category ${index + 1}",
+    category: _fakeCategories[index],
     sizes: [],
   );
 });
@@ -193,6 +203,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               children: _fakePopularFoods
                   .map(
                     (r) => PopularFoodCard(
+                      restaurantName: r.restaurant!.name,
                       popularFood: r,
                       withPrice: true,
                     ),

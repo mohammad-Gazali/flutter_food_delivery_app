@@ -8,3 +8,4 @@ export 'location_access_screen.dart';
 export 'search_screen.dart';
 export 'category_screen.dart';
 export 'food_details_screen.dart';
+export 'restaurant_details_screen.dart';

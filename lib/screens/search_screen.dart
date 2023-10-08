@@ -15,10 +15,12 @@ final _fakeSuggestedRestaurants = List.generate(3, (index) {
   return RestaurantModel(
     id: index,
     name: "Test ${index + 1}",
+    description: "Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
     rate: 4.5,
     estimatedMinutes: 20,
     deliveryPrice: 0,
     foods: [],
+    categories: [],
     introImage: "https://placehold.co/60x50/png",
     open: true,
   );
@@ -32,7 +34,7 @@ final _fakePopularFoods = List.generate(5, (index) {
     imageUrl: 'https://placehold.co/122x84/png',
     restaurant: _fakeSuggestedRestaurants[index % 2 == 0 ? index : index % 2],
     price: 29.99,
-    category: 'Category ${index + 1}',
+    category: const CategoryModel(id: 1, name: "", imageUrl: ""),
     sizes: [],
   );
 });
@@ -221,23 +223,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(40),
-                        border: const Border(
-                          top: BorderSide(
-                            width: 2,
-                            color: Color(0xFFEDEDED),
-                          ),
-                          bottom: BorderSide(
-                            width: 2,
-                            color: Color(0xFFEDEDED),
-                          ),
-                          left: BorderSide(
-                            width: 2,
-                            color: Color(0xFFEDEDED),
-                          ),
-                          right: BorderSide(
-                            width: 2,
-                            color: Color(0xFFEDEDED),
-                          ),
+                        border: Border.all(
+                          width: 2,
+                          color: const Color(0xFFEDEDED),
                         ),
                       ),
                       margin: EdgeInsets.only(
@@ -369,6 +357,7 @@ class _SearchScreenState extends State<SearchScreen> {
               children: _fakePopularFoods
                   .map(
                     (r) => PopularFoodCard(
+                      restaurantName: r.restaurant!.name,
                       popularFood: r,
                     ),
                   )

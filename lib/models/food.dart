@@ -7,11 +7,9 @@ class FoodModel {
   final String description;
   final String imageUrl;
   final List<String>? sizes;
-  final RestaurantModel restaurant;
+  final RestaurantModel? restaurant;
+  final CategoryModel? category;
   final double price;
-
-  // TODO: convert this attribute to CategoryModel type
-  final String category;
 
   const FoodModel({
     required this.id,
@@ -19,9 +17,9 @@ class FoodModel {
     required this.description,
     required this.imageUrl,
     required this.sizes,
-    required this.restaurant,
     required this.price,
-    required this.category,
+    this.restaurant,
+    this.category,
   });
 
   FoodModel.fromJson(JsonType data)
@@ -30,8 +28,7 @@ class FoodModel {
         description = data["description"],
         imageUrl = data["image_url"],
         sizes = data["sizes"],
-        restaurant = RestaurantModel.fromJson(data["restaurant"]),
+        restaurant = data.containsKey("restaurant") && data["restaurant"] != null ? RestaurantModel.fromJson(data["restaurant"]) : null,
         price = data["price"],
-        // TODO: if you changed category type use CategoryModel.fromJson constructor here
-        category = data["category"];
+        category = data.containsKey("restaurant") && data["restaurant"] != null ? CategoryModel.fromJson(data["category"]) : null;
 }

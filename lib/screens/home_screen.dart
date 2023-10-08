@@ -18,21 +18,14 @@ final _fakeRestaurants = List.generate(
   (index) => RestaurantModel(
     id: index,
     name: "Restaurant Test ${index + 1}",
+    description: "Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
     rate: 4.7,
     estimatedMinutes: 25,
     deliveryPrice: index % 2 == 0 ? 0.0 : 24.99,
     open: true,
     introImage: "https://placehold.co/400x200/png",
-    foods: index % 3 == 0
-        ? [
-            "Burger",
-            "Chicken",
-            "Rice",
-            "Wings",
-          ]
-        : [
-            "Pizza",
-          ],
+    foods: [],
+    categories: [],
   ),
 );
 
