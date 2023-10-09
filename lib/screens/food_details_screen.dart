@@ -66,6 +66,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                                 });
                               }
                             },
+                            splashColor: Colors.transparent,
                             child: Container(
                               width: 24,
                               height: 24,
@@ -91,6 +92,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                                 _numberOfFood++;
                               });
                             },
+                            splashColor: Colors.transparent,
                             child: Container(
                               width: 24,
                               height: 24,

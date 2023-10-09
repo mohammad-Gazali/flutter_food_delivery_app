@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTextInput extends StatelessWidget {
   final TextEditingController controller;
-  final String label;
+  final String? label;
   final String hintText;
   final TextInputType type;
   final bool isPassword;
@@ -10,10 +10,10 @@ class AppTextInput extends StatelessWidget {
   const AppTextInput({
     super.key,
     required this.controller,
-    required this.label,
     required this.hintText,
     this.type = TextInputType.text,
     this.isPassword = false,
+    this.label,
   });
 
   @override
@@ -25,13 +25,15 @@ class AppTextInput extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            label.toUpperCase(),
-            style: const TextStyle(fontSize: 16),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
+          if (label != null) ...[
+            Text(
+              label!.toUpperCase(),
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+          ],
           TextField(
             onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
             obscureText: isPassword,

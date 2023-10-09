@@ -28,7 +28,30 @@ class FoodModel {
         description = data["description"],
         imageUrl = data["image_url"],
         sizes = data["sizes"],
-        restaurant = data.containsKey("restaurant") && data["restaurant"] != null ? RestaurantModel.fromJson(data["restaurant"]) : null,
+        restaurant =
+            data.containsKey("restaurant") && data["restaurant"] != null
+                ? RestaurantModel.fromJson(data["restaurant"])
+                : null,
         price = data["price"],
-        category = data.containsKey("restaurant") && data["restaurant"] != null ? CategoryModel.fromJson(data["category"]) : null;
+        category = data.containsKey("restaurant") && data["restaurant"] != null
+            ? CategoryModel.fromJson(data["category"])
+            : null;
+}
+
+class SelectedFoodModel {
+  final int id;
+  final String name;
+  final String imageUrl;
+  final double priceForOne;
+  final String selectedSize;
+  final int quantity;
+
+  const SelectedFoodModel({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.priceForOne,
+    required this.selectedSize,
+    required this.quantity,
+  });
 }

@@ -61,9 +61,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                     ),
                   ),
                   const Spacer(),
-                  const SizedBox(
-                    width: 16,
-                  ),
                   SizedBox(
                     width: 45,
                     height: 45,

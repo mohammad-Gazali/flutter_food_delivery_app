@@ -9,3 +9,4 @@ export 'search_screen.dart';
 export 'category_screen.dart';
 export 'food_details_screen.dart';
 export 'restaurant_details_screen.dart';
+export 'cart_screen.dart';
